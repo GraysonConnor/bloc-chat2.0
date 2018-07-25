@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import MessageList from './MessageList';
 
 class RoomList extends Component {
   constructor(props) {
@@ -14,7 +15,7 @@ class RoomList extends Component {
 
   componentDidMount() {
     this.roomsRef.on('child_added', snapshot => {
-      const room = snapshot.val();
+      var room = snapshot.val();
       room.key = snapshot.key;
       this.setState({ rooms: this.state.rooms.concat( room ) });
     });
@@ -38,7 +39,7 @@ class RoomList extends Component {
       <div>
         <ul>
           {this.state.rooms.map((room) =>
-            <li key={ room.key }>{room.name}</li>
+           <li key={ room.key } onClick={() => this.props.setActiveRoom(room)}>{room.name}</li>
           )}
         </ul>
         <form onSubmit={ (e) => this.createRoom(e) }>
