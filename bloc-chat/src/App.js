@@ -43,9 +43,9 @@ class App extends Component {
       <h1>Bloc Chat</h1>
       <h2>{this.state.activeRoom.name || "Select Room"}</h2>
       <User firebase={firebase} setUser={this.setUser} currentUser={this.state.user}/>
-      <RoomList firebase={firebase} setActiveRoom={this.setActiveRoom} />
+       <RoomList firebase={firebase} setActiveRoom={this.setActiveRoom} currentUser={this.state.user}/>
       { this.state.activeRoom ?
-      (<MessageList firebase={firebase} setActiveRoom={this.state.activeRoom.key} />) : (null)
+      (<MessageList firebase={firebase} setActiveRoom={this.state.activeRoom.key} currentUser={this.state.user.displayName} />) : (null)
       }
     </div>
     );

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import RoomList from './RoomList';
+import User from './User.js';
 
 class MessageList extends Component {
   constructor(props) {
@@ -29,7 +30,7 @@ class MessageList extends Component {
   handleChange(e) {
     e.preventDefault();
     this.setState({
-      username: 'BlocStudent',
+      username: this.props.currentUser,
       content: e.target.value,
       sentAt: this.props.firebase.database.ServerValue.TIMESTAMP,
       roomId: this.props.setActiveRoom
@@ -54,7 +55,7 @@ class MessageList extends Component {
       <h4>Messages:</h4>
         {this.state.messages.map((message) => {
           if (message.roomId === this.props.setActiveRoom) {
-            return <li key={ message.key }>{message.content}</li>
+            return <li key={ message.key }>{message.content}<br /> <em>{message.username}</em></li>
           }
           null;
         })
